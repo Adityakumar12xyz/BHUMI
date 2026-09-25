@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BHUMI-INSIGHT v2 · National Land Governance Research Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef2e6;--panel:#fbfcf6;--ink:#17301f;--mute:#5b6f5f;--line:#d3dcc6;--leaf:#2f7d46;--moss:#1d4d2f;--clay:#b5652f;--sun:#d9a441;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a12;--panel:#15251a;--ink:#e6efdc;--mute:#9fb3a3;--line:#284133;--leaf:#5cc27a;--moss:#8fd9a5;--clay:#e0925c;--sun:#e6bb5c}}
+:root[data-theme="dark"]{--bg:#0e1a12;--panel:#15251a;--ink:#e6efdc;--mute:#9fb3a3;--line:#284133;--leaf:#5cc27a;--moss:#8fd9a5;--clay:#e0925c;--sun:#e6bb5c}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5}
+header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 20px}
+h1{font-size:21px;margin:0;font-weight:800}.sub{color:var(--mute);font-size:12.5px}
+button,select,input,textarea{font:inherit;color:var(--ink)}
+.b{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 13px;cursor:pointer;font-weight:600}
+.b.p{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.b:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;min-width:0}
+.card h3{margin:0 0 10px;font-size:15px}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.wrap{padding:0 20px 28px}
+#login{max-width:980px;margin:10px auto;padding:0 20px}
+.roles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-top:12px}
+.role{text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px;cursor:pointer}
+.role:hover{border-color:var(--leaf)}.role b{display:block;color:var(--moss);font-size:16px}.role span{font-size:12px;color:var(--mute)}
+nav{display:flex;gap:8px;flex-wrap:wrap;padding:0 20px 12px}
+nav .b[aria-selected=true]{background:var(--moss);color:var(--panel)}
+.map{display:grid;gap:14px;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:860px){.map{grid-template-columns:1fr}}
+.cvw{position:relative;height:460px;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(180deg,#cfe3d0,#eef2e6)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cvw{background:linear-gradient(180deg,#183324,#0e1a12)}}
+:root[data-theme="dark"] .cvw{background:linear-gradient(180deg,#183324,#0e1a12)}
+#c{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+#tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 9px;font-size:12px;display:none}
+.cap{position:absolute;left:12px;bottom:10px;font-size:12px;color:var(--mute);background:var(--panel);border-radius:8px;padding:3px 9px}
+.tag{font-size:11px;border-radius:6px;padding:2px 7px;font-weight:600;white-space:nowrap}
+.v{background:#2f7d4622;color:var(--leaf)}.d{background:#d9a44133;color:var(--clay)}.lk{background:var(--line);color:var(--mute)}
+ul.l{list-style:none;padding:0;margin:0}
+ul.l li{padding:9px 0;border-top:1px solid var(--line);font-size:13px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+ul.l li:first-child{border-top:0}
+.kpi{font-size:30px;font-weight:800;color:var(--moss);line-height:1}.kl{font-size:12px;color:var(--mute)}
+.bar{display:grid;grid-template-columns:120px 1fr 40px;gap:8px;align-items:center;font-size:12px;margin:6px 0}
+.bar i{display:block;height:10px;background:var(--leaf);border-radius:6px}
+.bar div{background:var(--line);border-radius:6px;overflow:hidden}
+input[type=text],input[type=search],select,textarea{width:100%;padding:9px 11px;border-radius:10px;border:1px solid var(--line);background:var(--bg);margin:4px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.chips .b{padding:4px 10px;font-size:12px}.chips .b[aria-pressed=true]{background:var(--moss);color:var(--panel)}
+.note{font-size:11.5px;color:var(--mute);margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:7px 6px;border-top:1px solid var(--line);text-align:left}
+.lock{text-align:center;padding:30px 10px}
+footer{padding:0 20px 30px;font-size:12px;color:var(--mute);max-width:112ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<header><div><h1>BHUMI-INSIGHT</h1><div class="sub">National Land Governance Research &amp; Policy Platform · SIH 2026 · PS 26019</div></div>
+<div style="display:flex;gap:8px;align-items:center"><span id="who" class="tag v" hidden></span><button class="b" id="out" hidden>Log out</button><button class="b" id="tb">Theme</button></div></header>
+
+<section id="login"><div class="card"><h3>Sign in to your workspace</h3>
+<div class="sub">Demo sign-in: pick a role and press Sign in. Real deployment would use government SSO with OTP. Each role sees different tools and data.</div>
+<div class="roles" id="roles"></div></div></section>
+
+<div id="app" hidden><nav id="nav" role="tablist"></nav><div class="wrap" id="view"></div></div>
+
+<footer><span class="tag v">Verified</span> national figures: Department of Land Resources (dolr.gov.in), PIB, NRSC/Bhuvan, as of early 2026; re-check on source before publishing. <span class="tag d">Demo</span> state and district research counts and paper titles are illustrative until the OGD (data.gov.in), state land portal and repository connectors are authorised. Land-record portal names per state are real. The India map is a tile cartogram (one tile per state or UT, height = research volume), not a boundary map. Eco design: no images or video, one small script, dark mode, NIC MeghRaj hosting planned.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const ROLES={Public:["Citizen / Student","Browse the map, read abstracts and open data."],
+Researcher:["Researcher","Read full papers, save to workspace, upload drafts."],
+Institution:["Institute / University","Upload and manage papers, track pilots and grants."],
+Official:["Government Officer","Benchmark states, run policy scenarios, view disputes."],
+Admin:["Administrator","Full access: approvals, users, connectors, audit."]};
+const TABS=[["map","Map & research",null],["up","Upload papers",["Researcher","Institution","Admin"]],["bench","State benchmark",["Official","Admin"]],["sim","Policy sandbox",["Official","Admin"]],["adm","Admin console",["Admin"]]];
+/* code:name:col:row:land-record portal */
+const ST="JK:Jammu & Kashmir:2:0:Jammu & Kashmir land records|LA:Ladakh:3:0:Ladakh land records|PB:Punjab:2:1:Punjab Jamabandi|HP:Himachal Pradesh:3:1:HimBhoomi|UK:Uttarakhand:4:1:Uttarakhand Bhulekh|HR:Haryana:2:2:Haryana Jamabandi|DL:Delhi:3:2:Delhi land records|RJ:Rajasthan:1:3:Apna Khata|UP:Uttar Pradesh:3:3:UP Bhulekh|BR:Bihar:5:3:Bihar Bhumi|SK:Sikkim:6:3:Sikkim land records|AR:Arunachal Pradesh:8:3:Arunachal land records|GJ:Gujarat:0:4:AnyRoR|MP:Madhya Pradesh:2:4:MP Bhulekh|CG:Chhattisgarh:3:4:Bhuiyan|JH:Jharkhand:5:4:Jharbhoomi|WB:West Bengal:6:4:Banglarbhumi|AS:Assam:7:4:Dharitree|NL:Nagaland:8:4:Nagaland land records|MH:Maharashtra:1:5:Mahabhulekh|TG:Telangana:2:5:Dharani|OD:Odisha:4:5:Bhulekh Odisha|ML:Meghalaya:7:5:Meghalaya land records|MN:Manipur:8:5:Manipur land records|GA:Goa:1:6:Goa Bhulekh|KA:Karnataka:2:6:Bhoomi|AP:Andhra Pradesh:3:6:MeeBhoomi|TR:Tripura:7:6:Tripura land records|MZ:Mizoram:8:6:Mizoram land records|KL:Kerala:2:7:ReLIS|TN:Tamil Nadu:3:7:TN Patta Chitta".split("|").map(s=>{const a=s.split(":");return{c:a[0],n:a[1],x:+a[2],y:+a[3],p:a[4]}});
+const DIST={UP:[["Lucknow","Urban"],["Kanpur Nagar","Urban"],["Bahraich","Rural"],["Varanasi","Mixed"]],MH:[["Pune","Urban"],["Nagpur","Mixed"],["Gadchiroli","Rural"],["Mumbai Suburban","Urban"]],KA:[["Bengaluru Urban","Urban"],["Mysuru","Mixed"],["Kalaburagi","Rural"]],TN:[["Chennai","Urban"],["Coimbatore","Mixed"],["Nilgiris","Rural"]],RJ:[["Jaipur","Urban"],["Jodhpur","Mixed"],["Barmer","Rural"]],GJ:[["Ahmedabad","Urban"],["Surat","Urban"],["Kutch","Rural"]],BR:[["Patna","Urban"],["Gaya","Mixed"],["Sitamarhi","Rural"]],OD:[["Bhubaneswar","Urban"],["Cuttack","Mixed"],["Koraput","Rural"]],KL:[["Thiruvananthapuram","Urban"],["Wayanad","Rural"]],WB:[["Kolkata","Urban"],["Sundarbans (South 24 Parganas)","Rural"]]};
+const TOP=["Land-use change and urban sprawl","Land records digitisation quality","Land dispute resolution","Women's land titling","Climate vulnerability of farmland","SVAMITVA drone mapping outcomes","Tribal and forest land rights","Cadastral map accuracy"];
+const KIND=["Research paper","Policy brief","Case study","Dataset"];
+const hs=(s)=>{let h=7;for(const ch of s)h=(h*31+ch.charCodeAt(0))%100003;return h};
+const BIG="UP MH KA TN RJ GJ MP BR WB OD".split(" ");
+ST.forEach(s=>s.n_=8+hs(s.c)%30+(BIG.includes(s.c)?28:0));
+function papers(s,place){const pl=place||s.n,base=hs(s.c+pl);const a=[];for(let i=0;i<6;i++){const k=base+i*13;a.push({t:TOP[k%8]+": "+pl,y:2019+k%7,k:KIND[k%4],q:55+k%42,full:k%3!==0,st:"Approved",by:"Demo repository"})}return a}
+let user=null,sel=null,dsel=null,filt="All",extra=[],audit=[];
+const log=m=>audit.unshift([new Date().toLocaleTimeString(),user?user:"System",m]);
+const can=t=>!t[2]||t[2].includes(user);
+const bar=(n,v,m,c)=>`<div class="bar"><span>${n}</span><div><i style="width:${v/m*100}%;${c?'background:'+c:''}"></i></div><span>${v}</span></div>`;
+/* login */
+Object.keys(ROLES).forEach(r=>{const b=document.createElement('button');b.className='role';b.innerHTML=`<b>${ROLES[r][0]}</b><span>${ROLES[r][1]}</span>`;b.onclick=()=>{user=r;log("Signed in");$('#login').hidden=true;$('#app').hidden=false;$('#who').hidden=$('#out').hidden=false;$('#who').textContent=ROLES[r][0];nav();go("map")};$('#roles').appendChild(b)});
+$('#out').onclick=()=>{log("Signed out");user=null;$('#login').hidden=false;$('#app').hidden=true;$('#who').hidden=$('#out').hidden=true;stop()};
+$('#tb').onclick=()=>{const r=document.documentElement,d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark'};
+function nav(){$('#nav').innerHTML="";TABS.forEach(t=>{const b=document.createElement('button');b.className='b';b.setAttribute('role','tab');b.dataset.t=t[0];b.textContent=(can(t)?"":"🔒 ")+t[1];b.onclick=()=>go(t[0]);$('#nav').appendChild(b)})}
+function go(id){[...$('#nav').children].forEach(b=>b.setAttribute('aria-selected',b.dataset.t===id));const t=TABS.find(x=>x[0]===id);stop();
+ if(!can(t)){$('#view').innerHTML=`<div class="card lock"><h3>🔒 ${t[1]} is not available to your role</h3><div class="sub">Available to: ${t[2].join(", ")}. Sign in with one of those roles to use it.</div></div>`;return}
+ ({map:vMap,up:vUp,bench:vBench,sim:vSim,adm:vAdm})[id]()}
+/* MAP */
+function vMap(){$('#view').innerHTML=`<div class="map"><div class="cvw"><canvas id="c"></canvas><div id="tip"></div><div class="cap">Tile map of India · height = research volume (Demo) · drag to rotate · click a state</div></div><div id="side"></div></div>`;init3d();side()}
+function side(){const s=sel;let h="";
+ if(!s){h=`<div class="card"><h3>India at a glance</h3><div class="g"><div><div class="kpi">99.8%</div><div class="kl">RoR computerised <span class="tag v">Verified</span></div></div><div><div class="kpi">97.4%</div><div class="kl">Maps digitised <span class="tag v">Verified</span></div></div><div><div class="kpi">26+</div><div class="kl">ULPIN states/UTs <span class="tag v">Verified</span></div></div><div><div class="kpi">${ST.reduce((a,x)=>a+x.n_,0)}</div><div class="kl">Indexed research items <span class="tag d">Demo</span></div></div></div><div class="note">Click any state tile to see its research, districts, cities and villages, and its land-record portal.</div></div>`}
+ else{const d=DIST[s.c];let list=papers(s,dsel);if(filt!=="All")list=list.filter(p=>p.k===filt);list=extra.filter(e=>e.s===s.c&&(e.st==="Approved"||user==="Admin"||user==="Institution")).concat(list);
+  h=`<div class="card"><h3>${s.n} <span class="tag d">${s.n_} items</span></h3><div class="kl">Land-record portal: <b>${s.p}</b> <span class="tag v">Verified</span></div>
+  <div class="chips" id="dc"><button class="b" aria-pressed="${!dsel}" data-d="">Whole state</button>${d?d.map(x=>`<button class="b" aria-pressed="${dsel===x[0]}" data-d="${x[0]}">${x[0]} · ${x[1]}</button>`).join(""):""}</div>
+  ${d?"":`<div class="note">District, city and village lists for ${s.n} load from its state connector (pending).</div>`}
+  <div class="chips" id="fc">${["All",...KIND].map(k=>`<button class="b" aria-pressed="${filt===k}" data-k="${k}">${k}</button>`).join("")}</div>
+  <ul class="l">${list.map(p=>`<li><span>${p.t}<br><small class="sub">${p.k} · ${p.y} · quality ${p.q}${p.st!=="Approved"?" · "+p.st:""}</small></span>${p.full&&user==="Public"?'<span class="tag lk">🔒 Abstract only</span>':'<button class="b">Open</button>'}</li>`).join("")}</ul>
+  ${user==="Public"?'<div class="note">Full text needs a Researcher, Institution, Officer or Admin login.</div>':""}
+  ${user==="Official"||user==="Admin"?`<button class="b p" id="ev">Create evidence pack for ${dsel||s.n}</button><div class="note" id="evm"></div>`:""}</div>`}
+ $('#side').innerHTML=h;
+ document.querySelectorAll('#dc .b').forEach(b=>b.onclick=()=>{dsel=b.dataset.d||null;side()});
+ document.querySelectorAll('#fc .b').forEach(b=>b.onclick=()=>{filt=b.dataset.k;side()});
+ const ev=$('#ev');if(ev)ev.onclick=()=>{log("Evidence pack: "+(dsel||s.n));$('#evm').textContent="Evidence pack saved with sources, assumptions and limitations."}}
+/* UPLOAD */
+function vUp(){const mine=extra.filter(e=>e.by===user||user==="Admin");
+ $('#view').innerHTML=`<div class="g"><div class="card"><h3>Upload a paper or dataset</h3><label>Title<input type="text" id="ut"></label><label>State<select id="us">${ST.map(s=>`<option value="${s.c}">${s.n}</option>`).join("")}</select></label><label>Type<select id="uk">${KIND.map(k=>`<option>${k}</option>`).join("")}</select></label><label>File (PDF, CSV)<input type="file" id="uf"></label><button class="b p" id="ub">Submit for review</button><div class="note" id="um">${user==="Researcher"?"Researchers can submit drafts.":"Institutions can submit and manage papers. "}Submissions are reviewed by an Admin before they become public. Files stay in this browser in the demo.</div></div>
+ <div class="card"><h3>My submissions</h3><ul class="l">${mine.map(e=>`<li><span>${e.t}<br><small class="sub">${e.s} · ${e.k}</small></span><span class="tag ${e.st==="Approved"?"v":"d"}">${e.st}</span></li>`).join("")||"<li>Nothing submitted yet. Use the form to add your first item.</li>"}</ul></div></div>`;
+ $('#ub').onclick=()=>{const t=$('#ut').value.trim();if(!t){$('#um').textContent="Enter a title first.";return}extra.push({t,s:$('#us').value,k:$('#uk').value,y:2026,q:"–",full:false,st:user==="Admin"?"Approved":"Pending",by:user});log("Uploaded: "+t);vUp()}}
+/* BENCH */
+function vBench(){const r=[...ST].sort((a,b)=>b.n_-a.n_).slice(0,12);
+ $('#view').innerHTML=`<div class="g"><div class="card"><h3>Research volume by state <span class="tag d">Demo</span></h3>${r.map(s=>bar(s.n,s.n_,r[0].n_)).join("")}</div><div class="card"><h3>Land-dispute pressure index <span class="tag d">Demo</span></h3>${r.slice(0,8).map(s=>bar(s.n,20+hs(s.c+"d")%75,100,"var(--clay)")).join("")}<div class="note">Will use eCourts and state dispute data once connected.</div></div><div class="card"><h3>Compare two states</h3><select id="a">${ST.map(s=>`<option>${s.n}</option>`).join("")}</select><select id="b2">${ST.map((s,i)=>`<option ${i==8?"selected":""}>${s.n}</option>`).join("")}</select><div id="cm"></div></div></div>`;
+ const u=()=>{const f=n=>ST.find(s=>s.n===n),A=f($('#a').value),B=f($('#b2').value);$('#cm').innerHTML=`<table><tr><th></th><th>${A.c}</th><th>${B.c}</th></tr><tr><td>Research items</td><td>${A.n_}</td><td>${B.n_}</td></tr><tr><td>Portal</td><td>${A.p}</td><td>${B.p}</td></tr><tr><td>Dispute index</td><td>${20+hs(A.c+"d")%75}</td><td>${20+hs(B.c+"d")%75}</td></tr></table>`};$('#a').onchange=$('#b2').onchange=u;u()}
+/* SIM */
+function vSim(){$('#view').innerHTML=`<div class="card"><h3>Policy sandbox: limit farmland conversion <span class="tag d">Demo</span></h3><label>State<select id="ss">${ST.map(s=>`<option>${s.n}</option>`).join("")}</select></label><label>Protected farmland share <b id="pv"></b><input type="range" id="p" min="0" max="80" value="40"></label><label>Years ahead <b id="hv"></b><input type="range" id="h" min="1" max="20" value="10"></label><div class="g"><div class="card"><div class="kl">Baseline farmland retained</div><div class="kpi" id="b1"></div></div><div class="card"><div class="kl" id="b3">Scenario</div><div class="kpi" id="b2" style="color:var(--leaf)"></div></div></div><button class="b p" id="ep">Save scenario as evidence pack</button><div class="note" id="epm">Stores parameters, model v0.3, assumptions, uncertainty, user and time. This is a transparent teaching model, not a forecast.</div></div>`;
+ const u=()=>{const p=+$('#p').value,h=+$('#h').value,g=1.8;$('#pv').textContent=p+"%";$('#hv').textContent=h;$('#b1').textContent=(100-g*h).toFixed(1)+"%";$('#b2').textContent=(100-g*h*(1-p*0.0085)).toFixed(1)+"%";$('#b3').textContent="Scenario, uncertainty ±"+(0.15*h).toFixed(1)+" pts"};$('#p').oninput=$('#h').oninput=u;u();$('#ep').onclick=()=>{log("Scenario saved: "+$('#ss').value);$('#epm').textContent="Saved as EP-"+Date.now().toString().slice(-6)+" for "+$('#ss').value+"."}}
+/* ADMIN */
+function vAdm(){const pend=extra.filter(e=>e.st==="Pending");
+ $('#view').innerHTML=`<div class="g"><div class="card"><h3>Pending approvals</h3><ul class="l">${pend.map((e,i)=>`<li><span>${e.t}<br><small class="sub">${e.s} · by ${e.by}</small></span><button class="b p" data-i="${extra.indexOf(e)}">Approve</button></li>`).join("")||"<li>No submissions waiting.</li>"}</ul></div>
+ <div class="card"><h3>Users and roles <span class="tag d">Demo</span></h3><table>${Object.keys(ROLES).map(r=>`<tr><td>${ROLES[r][0]}</td><td>${{Public:"Read only",Researcher:"Read, upload drafts",Institution:"Read, upload, manage",Official:"Analytics, scenarios",Admin:"Everything"}[r]}</td></tr>`).join("")}</table></div>
+ <div class="card"><h3>Source connectors <span class="tag d">Demo</span></h3><ul class="l"><li>DILRMP / state land portals<span class="tag v">Ready</span></li><li>ULPIN<span class="tag v">Ready</span></li><li>NGDRS<span class="tag v">Ready</span></li><li>Bhuvan OGC layers<span class="tag v">Ready</span></li><li>data.gov.in (OGD)<span class="tag v">Ready</span></li><li>NAKSHA<span class="tag d">Awaiting approval</span></li></ul></div>
+ <div class="card"><h3>Data freshness</h3>${[["Land records",92],["Satellite LULC",71],["Registration",64],["Court data",48]].map(x=>bar(x[0],x[1],100)).join("")}</div>
+ <div class="card" style="grid-column:1/-1"><h3>Audit trail (live)</h3><table>${audit.slice(0,12).map(a=>`<tr><td>${a[0]}</td><td>${a[1]}</td><td>${a[2]}</td></tr>`).join("")}</table></div></div>`;
+ document.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{const e=extra[+b.dataset.i];e.st="Approved";log("Approved: "+e.t);vAdm()})}
+/* 3D */
+let R=null;function stop(){if(R){cancelAnimationFrame(R.raf);R.ren.dispose();R=null}}
+function init3d(){const cv=$('#c'),ren=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true}),sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(40,1,.1,200);
+ sc.add(new THREE.HemisphereLight(0xffffff,0x446644,.95));const dl=new THREE.DirectionalLight(0xffffff,.8);dl.position.set(8,18,10);sc.add(dl);
+ const ms=[];ST.forEach(s=>{const h=.4+s.n_*.045,m=new THREE.Mesh(new THREE.BoxGeometry(.9,h,.9),new THREE.MeshLambertMaterial({color:BIG.includes(s.c)?0x2f7d46:0x6fae4a}));m.position.set(s.x-4,h/2,s.y-3.5);m.userData=s;sc.add(m);ms.push(m)});
+ const rc=new THREE.Raycaster(),mv=new THREE.Vector2();let rx=.95,ry=0,z=15,dr=false,px=0,py=0,moved=0;
+ const col=()=>ms.forEach(m=>m.material.emissive.setHex(sel&&m.userData===sel?0x556b00:0));col();
+ const pick=e=>{const r=cv.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);rc.setFromCamera(mv,cam);const h=rc.intersectObjects(ms)[0];return h?h.object:null};
+ cv.onpointerdown=e=>{dr=true;moved=0;px=e.clientX;py=e.clientY;cv.setPointerCapture(e.pointerId)};
+ cv.onpointerup=e=>{dr=false;if(moved<5){const o=pick(e);if(o){sel=o.userData;dsel=null;filt="All";col();side()}}};
+ cv.onpointermove=e=>{const t=$('#tip');if(dr){moved+=Math.abs(e.clientX-px)+Math.abs(e.clientY-py);ry+=(e.clientX-px)*.008;rx=Math.max(.3,Math.min(1.4,rx+(e.clientY-py)*.006));px=e.clientX;py=e.clientY;return}
+  const o=pick(e);if(o){t.style.display="block";t.style.left=e.offsetX+12+"px";t.style.top=e.offsetY+12+"px";t.textContent=o.userData.n+" · "+o.userData.n_+" items"}else t.style.display="none"};
+ cv.onwheel=e=>{e.preventDefault();z=Math.max(9,Math.min(26,z+e.deltaY*.02))};
+ const rs=()=>{ren.setPixelRatio(Math.min(devicePixelRatio,2));ren.setSize(cv.clientWidth,cv.clientHeight,false);cam.aspect=cv.clientWidth/cv.clientHeight;cam.updateProjectionMatrix()};rs();
+ R={ren};const loop=()=>{cam.position.set(Math.sin(ry)*Math.cos(rx)*z,Math.sin(rx)*z,Math.cos(ry)*Math.cos(rx)*z);cam.lookAt(0,0,0);col();ren.render(sc,cam);R.raf=requestAnimationFrame(loop)};loop()}
+</script></body></html>
